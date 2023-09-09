@@ -1,0 +1,14 @@
+{
+  "name": "Blog",
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}   

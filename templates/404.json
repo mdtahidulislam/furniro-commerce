@@ -1,0 +1,14 @@
+{
+  "name": "404",
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

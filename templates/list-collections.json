@@ -1,0 +1,14 @@
+{
+  "name": "Collection Listq",
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

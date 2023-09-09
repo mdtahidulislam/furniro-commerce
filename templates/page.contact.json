@@ -1,0 +1,14 @@
+{
+  "name": "Contact Page",
+  "sections": {
+    "contact-form": {
+      "type": "contact-form",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "contact-form"
+  ]
+}

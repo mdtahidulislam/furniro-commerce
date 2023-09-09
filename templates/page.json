@@ -1,0 +1,14 @@
+{
+  "name": "Main Page",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

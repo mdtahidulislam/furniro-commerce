@@ -1,0 +1,14 @@
+{
+  "name": "Login",
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

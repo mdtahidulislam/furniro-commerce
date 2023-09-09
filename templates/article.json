@@ -1,0 +1,14 @@
+{
+  "name": "Article",
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Loctote Clone",
+    "theme_author": "Tahidul Islam",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://loctote-clone.myshopify.com/",
+    "theme_support_url": "https://loctote-clone.myshopify.com/"
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  }
+]

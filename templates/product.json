@@ -1,0 +1,14 @@
+{
+  "name": "Product",
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

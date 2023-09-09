@@ -1,0 +1,14 @@
+{
+  "name": "Cart Items",
+  "sections": {
+    "main": {
+      "type": "main-cart-items",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

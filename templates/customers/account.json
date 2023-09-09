@@ -1,0 +1,14 @@
+{
+  "name": "Account",
+  "sections": {
+    "main": {
+      "type": "main-account",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

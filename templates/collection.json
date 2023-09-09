@@ -1,0 +1,21 @@
+{
+  "name": "Collection",
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "yourOption": "value"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "yourOption": "value"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid"
+  ]
+}
