@@ -27,13 +27,19 @@
     <link rel="canonical" href="{{ canonical_url }}">
 
     <!-- load scripts from shopify -->
-    {{ content_for_header}}
+    {{ content_for_header }}
 </head>
 <body>
+    {% comment %} header {% endcomment %}
+    {% section 'header' %}
+
     <!-- main content -->
     <main>
         <!-- dynamically output from all template  -->
-        {{content_for_layout}}
+        {{ content_for_layout }}
     </main>
+
+    {% comment %} footer {% endcomment %}
+    {% section 'footer' %}
 </body>
 </html>
