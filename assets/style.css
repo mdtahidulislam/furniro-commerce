@@ -3,3 +3,61 @@
     padding: 0;
     outline: 0;
 }
+/* start common css */
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+/* end common css */
+
+/*  start header */
+
+.header-area {
+    background: #fff;
+}
+.header-container {
+    padding: 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.logo a {
+    display: block;
+}
+.logo a img {
+    display: block;
+}
+.header-menu {
+    flex: 1;
+}
+.header-menu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.header-logs ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+}
+.header-logs ul li {
+    display: inline-flex;
+}
+.header-logs ul li a {
+    display: inline-block;
+}
+.header-logs ul li a img {
+    display: block;
+    width: 22px;
+}
+
+
+
+
+/*  end header */

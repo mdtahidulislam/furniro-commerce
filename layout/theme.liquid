@@ -26,6 +26,21 @@
     <!-- canonical url -->
     <link rel="canonical" href="{{ canonical_url }}">
 
+    <!-- Global Fonts from Shopify host -->
+    {% assign body_font = settings.body_font %}
+    <style>
+        :root {
+            --font-body: {{ body_font.family }}
+        }
+        body {
+            font-family: var(--font-body), sans-serif;
+            font-weight: {{ body_font.weight }}
+        }
+    </style>
+    
+    <!-- All Assets -->
+    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+
     <!-- load scripts from shopify -->
     {{ content_for_header }}
 </head>

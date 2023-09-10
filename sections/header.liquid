@@ -2,13 +2,42 @@
   <div class="header-container">
     <div class="header-logo">
       <div class="logo">
-        <a href="#">
-          <img src="" alt="Furniro" width="" height="" loading="lazy">
+        <a href="{{ shop.url }}">
+          <img src="{{ section.settings.logo | image_url }}" alt="{{ section.settings.logo_alt }}" width="" height="" loading="lazy">
         </a>
       </div>
     </div>
-    <div class="header-menu"></div>
-    <div class="header-logs"></div>
+    <div class="header-menu">
+        <ul>
+            {% for link in linklists.main-menu.links %}
+                <li>{{ link.title | link_to: link.url }}</li> 
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="header-logs">
+        <ul>
+            <li>
+                <a href="#" class="account">
+                    <img src="{{ 'account.svg' | asset_url }}" alt="account" width="" height="" loading="lazy">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="search">
+                    <img src="{{ 'search.svg' | asset_url }}" alt="search" width="" height="" loading="lazy">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="wishlist">
+                    <img src="{{ 'heart.svg' | asset_url }}" alt="wishlist" width="" height="" loading="lazy">
+                </a>
+            </li>
+            <li>
+                <a href="#" class="cart">
+                    <img src="{{ 'cart.svg' | asset_url }}" alt="cart" width="" height="" loading="lazy">
+                </a>
+            </li>
+        </ul>
+    </div>
   </div>
 </header>
 
@@ -16,7 +45,17 @@
     {
         "name": "Header Area",
         "settings": [
-        
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Logo"
+            },
+            {
+                "type": "text",
+                "id": "logo_alt",
+                "label": "Logo Alter Text",
+                "default": "Furniro"
+            }
         ]
     }
 {% endschema %}
