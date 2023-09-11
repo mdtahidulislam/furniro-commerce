@@ -26,14 +26,15 @@
     <!-- canonical url -->
     <link rel="canonical" href="{{ canonical_url }}">
 
-    <!-- Global Fonts from Shopify host -->
+    <!-- Global CSS -->
+    {% comment %} Fonts from Shopify host {% endcomment %}
     {% assign body_font = settings.body_font %}
     <style>
         :root {
             --font-body: {{ body_font.family }}
         }
         body {
-            font-family: var(--font-body), sans-serif;
+            font-family: var(--font-body), {{ body_font.fallback_families }};
             font-weight: {{ body_font.weight }}
         }
     </style>
@@ -56,5 +57,8 @@
 
     {% comment %} footer {% endcomment %}
     {% section 'footer' %}
+
+    <script src="{{ 'jquery.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'main.js' | asset_url }}" defer="defer"></script>
 </body>
 </html>

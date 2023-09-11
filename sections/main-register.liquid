@@ -1,1 +1,37 @@
-<h1>Register</h1>
+<div class="login-area">
+    <div class="ocntauner">
+        <div class="login-form-area">
+            {% form 'create_customer', class: 'customer-form customer-create' %}
+                <div class="form-title-wrapper">
+                    <div class="page-title form-title">Create account</div>
+                </div>
+                {{ form.errors | default_errors }}
+              
+                <div class="first-name csf-line">
+                  <label for="first-name">First name</label>
+                  <input type="text" name="customer[first_name]">
+                </div>
+              
+                <div class="last-name csf-line">
+                  <label for="last-name">Last name</label>
+                  <input type="text" name="customer[last_name]">
+                </div>
+              
+                <div class="email csf-line">
+                  <label for="email">Email</label>
+                  <input type="email" name="customer[email]">
+                </div>
+              
+                <div class="password csf-line">
+                  <label for="password">Password</label>
+                  <input type="password" name="customer[password]">
+                </div>
+              
+                <div class="submit csf-submit">
+                  <input type="submit" value="Create">
+                </div>
+              {% endform %}
+              
+        </div>
+    </div>
+</div>

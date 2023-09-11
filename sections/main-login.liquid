@@ -1,1 +1,52 @@
-<h1>Login</h1>
+<div class="login-area">
+    <div class="ocntauner">
+        <div class="login-form-area">
+            {% comment %} login {% endcomment %}
+            {% form 'customer_login', class: 'customer-form customer-login' %}
+                <div class="form-title-wrapper">
+                    <div class="page-title form-title">Login</div>
+                </div>
+                {{ form.errors | default_errors }}
+              
+                <div class="email csf-line">
+                  <label for="email">Email</label>
+                  <input type="email" name="customer[email]">
+                </div>
+              
+                <div class="password csf-line">
+                  <label for="password">Password</label>
+                  <input type="password" name="customer[password]">
+                </div>
+                
+                <a href="#recover" class="reover-password-btn">Forgot your password?</a>
+                
+                <div class="submit csf-submit">
+                  <input type="submit" value="Sign in">
+                </div>
+                <div class="acc-create-area">
+                    <a href="/account/register" class="acc-create-btn">Create Account</a>
+                </div>
+            {% endform %}
+            {% comment %} forgot/recover password {% endcomment %}
+            {% form 'recover_customer_password', class: 'customer-form customer-recover-password' %}
+                <div class="form-title-wrapper">
+                    <div class="page-title form-title">Reset your password</div>
+                    <p class="form-subtitle">We will send you an email to reset your password</p>
+                </div>
+                {{ form.errors | default_errors }}
+              
+                <div class="email csf-line">
+                  <label for="email">Email</label>
+                  <input type="email" name="email">
+                </div>
+                <div class="submit csf-submit">
+                  <input type="submit" value="Submit">
+                </div>
+                <div class="cancel-btn-area">
+                    <a href="#login" class="cancel-btn">Cancel</a>
+                </div>
+              {% endform %}
+              
+        </div>
+    </div>
+</div>

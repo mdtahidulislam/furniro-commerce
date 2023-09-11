@@ -12,12 +12,21 @@ ul {
 a{
     text-decoration: none;
 }
+.page-title {
+    font-size: 3rem;
+    font-weight: 700;
+}
+.shopify-challenge__container {
+    padding: 100px 0;
+}
 /* end common css */
 
 /*  start header */
 
 .header-area {
-    background: #fff;
+    padding: 20px 0;
+    border-bottom: 1px solid #d2d5d8;
+    background: #f6f6f7;
 }
 .header-container {
     padding: 0 30px;
@@ -57,7 +66,59 @@ a{
     width: 22px;
 }
 
-
-
-
 /*  end header */
+
+/* start customer login */
+.form-title-wrapper {
+    text-align: center;
+    padding: 40px 0;
+}
+.form-subtitle{
+    margin-top: 20px;
+}
+.customer-form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+.csf-line {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.csf-line input {
+    padding: 10px 15px;
+}
+.reover-password-btn {
+    margin-bottom: 50px;
+    display: block;
+    color: inherit;
+}
+.csf-submit {
+    display: flex;
+    justify-content: center;
+}
+.csf-submit input {
+    padding: 10px 15px;
+    font-size: 17px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+}
+.customer-recover-password {
+    display: none;
+}
+.cancel-btn-area,
+.acc-create-area {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.cancel-btn,
+.acc-create-btn {
+    border-bottom: 1px solid #000;
+}
+/* end customer login */
