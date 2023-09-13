@@ -1,1 +1,51 @@
-<h1>Main Product</h1>
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+<section class="product product-single" data-product-id="{{ product.id }}" data-variant-id="{{ current_variant.id }}">
+    <div class="container">
+        <div class="product-container">
+            <div class="product-left">
+                <div class="product-featured-img">
+                    <img 
+                        src="{{ featured_image.src | image_url }}" 
+                        alt="{{ featured_image.alt | escape }}"
+                        width="auto"
+                        height="auto"
+                        loading="lazy"
+                        class="product-big-img"
+                    >
+                </div>
+                {% comment %} <div class="product-thumbnails">
+                    {% for img in product.images %}
+                        <img 
+                            src="{{ img.src | image_url }}" 
+                            alt="{{ img.alt | escape }}"
+                            width="100"
+                            height="auto"
+                            loading="lazy"
+                            class="product-thumb-img"
+                        >
+                    {% endfor %}
+                </div> {% endcomment %}
+            </div>
+            <div class="product-right">
+                <h1 class="product-title">{{ product.title }}</h1>
+                <p class="product-vendor">{{ product.vendor }}</p>
+                <p class="product-price">{{ product.price | money }}</p>
+                <div class="product-form-area">
+                    {% form 'product', product %}
+                        {% comment %} select variant (must) {% endcomment %}
+                        <input
+                            type="hidden"
+                            name="id"
+                            value="{{ product.selected_or_first_available_variant.id }}"
+                        >
+                        <input type="number" id="quantity" name="quantity" value="1" min="1">
+                        <input type="submit" value="Add to cart">
+                        {{ form | payment_button }}
+                    {% endform %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
