@@ -1,12 +1,12 @@
 {
   "sections": {
-    "main": {
+    "mainProduct": {
       "type": "main-product",
       "settings": {
       }
     }
   },
   "order": [
-    "main"
+    "mainProduct"
   ]
 }

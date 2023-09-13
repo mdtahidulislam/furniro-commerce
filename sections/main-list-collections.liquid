@@ -1,1 +1,12 @@
-<h1>Collection List</h1>
+<div class="collections">
+    <div class="container">
+        <div class="page-title-wrapper text-center">
+            <h1 class="page-title">Collections</h1>
+        </div>
+        <div class="collections-area">
+            {% for collection in collections %}
+                {% render 'card-collection', collection_object_item: collection %}
+            {% endfor %}
+        </div>
+    </div>
+</div>

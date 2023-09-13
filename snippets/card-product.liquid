@@ -1,0 +1,35 @@
+{% comment %}
+    Renders a product card
+
+    Accepts:
+    - card_product: {Object} product Liquid object
+    
+    Usage:
+    {% render 'card-product' %}
+{% endcomment %}
+
+<a href="{{ card_product.url }}" class="product-grid-item">
+    <div class="product-img">
+        <img 
+            src="{{ card_product.featured_media | image_url: width: 533 }}"
+            sizes="(min-width: 1200px) 267px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)" 
+            alt="{{ card_product.featured_media.alt }}" 
+            loading="lazy"
+            width="" 
+            height="300" 
+        >
+    </div>
+    <div class="product-title-wrapper text-center">
+        <h2 class="product-title">{{ card_product.title }}</h2>
+    </div>
+    <div class="product-price-wrapper text-center">
+        <h2 class="product-price">{{ card_product.price | money_with_currency }}</h2>
+    </div>
+    {% if card_product.available %}
+        {% if card_product.compare_at_price_max > card_product.price %}
+          <span class="badge sale">-{{ card_product.compare_at_price | minus: card_product.price | times: 100 | divided_by: card_product.compare_at_price | round }}%</span>
+        {% endif %}
+      {% else %}
+        <span class="badge sold-out">Sold Out</span>
+      {% endif %}
+</a>

@@ -1,0 +1,37 @@
+{% comment %}
+    Renders a collection card
+
+    Accepts:
+    - collection_object_item: {Object} Collection Liquid object
+    
+    Usage:
+    {% render 'card-collection' %}
+{% endcomment %}
+
+{% assign collection_featured_image = '' %}  
+{% if collection_object_item.image %}
+    {% assign collection_featured_image = collection_object_item.image %}  
+{% else %}
+    {% assign collection_featured_image = collection_object_item.featured_image %}    
+{% endif %}
+
+
+<a href="{{ collection_object_item.url }}" class="collection-grid">
+    <div class="collection-img">
+        {% if collection_featured_image %}
+            <img 
+                src="{{ collection_featured_image | image_url: width: 250 }}" 
+                alt="Alt" 
+                width="{{ card_collection.featured_image.width }}" 
+                height="{{ card_collection.featured_image.height }}" 
+                loading="lazy"
+            >
+        {% else %}
+            {{ 'collection-1' | placeholder_svg_tag }}
+        {% endif %}
+        
+    </div>
+    <div class="collection-title-wrapper">
+        <h2 class="collection-title">{{ collection_object_item.title }}</h2>
+    </div>
+</a>
