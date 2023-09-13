@@ -36,6 +36,12 @@ main {
 .text-center {
     text-align: center;
 }
+input, button {
+    padding: 10px 15px;
+}
+input, button {
+    cursor: pointer;
+}
 /* end common css */
 
 /*  start header */
@@ -252,6 +258,18 @@ main {
 }
 .product-price{
     margin-top: 20px;
+}
+.shopify-product-form {
+    margin-top: 20px;
+}
+.shopify-product-form input {
+    width: -webkit-fill-available;
+    margin-bottom: 20px;
+}
+.product-recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
 }
 /* end single product */
 

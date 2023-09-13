@@ -23,7 +23,7 @@
         <h2 class="product-title">{{ card_product.title }}</h2>
     </div>
     <div class="product-price-wrapper text-center">
-        <h2 class="product-price">{{ card_product.price | money_with_currency }}</h2>
+        <h2 class="product-price">{% if card_product.compare_at_price_max > card_product.price %}<s>{{ card_product.compare_at_price | money_with_currency }}</s>{% endif %} {{ card_product.price | money_with_currency }} </h2>
     </div>
     {% if card_product.available %}
         {% if card_product.compare_at_price_max > card_product.price %}

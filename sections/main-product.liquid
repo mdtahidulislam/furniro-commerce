@@ -31,7 +31,7 @@
             <div class="product-right">
                 <h1 class="product-title">{{ product.title }}</h1>
                 <p class="product-vendor">{{ product.vendor }}</p>
-                <p class="product-price">{{ product.price | money }}</p>
+                <p class="product-price">{% if current_variant.compare_at_price > current_variant.price %}<s>{{ current_variant.compare_at_price | money_with_currency }}</s>{% endif %} {{ current_variant.price | money_with_currency }}</p>
                 <div class="product-form-area">
                     {% form 'product', product %}
                         {% comment %} select variant (must) {% endcomment %}
@@ -41,10 +41,11 @@
                             value="{{ product.selected_or_first_available_variant.id }}"
                         >
                         <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <input type="submit" value="Add to cart">
+                        <input type="submit" value="Add to cart" {% unless current_variant.available %}disabled="disabled" {% endunless %}>
                         {{ form | payment_button }}
                     {% endform %}
                 </div>
+                <p class="product-description">{{ product.description }}</p>
             </div>
         </div>
     </div>

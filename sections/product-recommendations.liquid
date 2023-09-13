@@ -1,0 +1,47 @@
+<div class="product product-recommendations" data-url="{{ routes.product_recommendations_url }}">
+    <div class="container">
+        {%- if recommendations.performed? -%}
+            <div id="product-recommendations">
+                {%- if recommendations.products_count > 0 -%}
+                    <div class="page-title-wrapper">
+                        {% if recommendations.intent == 'related' %}
+                            <h1 class="page-title">You may also like</h1>
+                        {% elsif recommendations.intent == 'complementary' %}
+                            <h1 class="page-title">Pair it with</h1>
+                        {% endif %}
+                    </div>
+                    <div class="product-recommendations-grid">
+                        {%- for product in recommendations.products -%}
+                            {% render 'card-product', card_product: product %}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}          
+    </div>
+</div>
+
+<script>
+    const productRecommendationsSection = document.querySelector('.product-recommendations');
+    fetch(window.Shopify.routes.root + "recommendations/products?product_id={{ product.id }}&limit=4&section_id={{ section.id }}&intent=related")
+    .then(response => response.text())
+    .then((text) => {
+        const html = document.createElement('div');
+        html.innerHTML = text;
+        const recommendations = html.querySelector('.product-recommendations');
+
+        if (recommendations && recommendations.innerHTML.trim().length) {
+            productRecommendationsSection.innerHTML = recommendations.innerHTML;
+        }
+    })
+    .catch(e => {
+        console.error(e);
+    });
+</script>
+
+{% schema %}
+    {
+        "name": "Product recommendations",
+        "settings": []
+    }
+{% endschema %}
