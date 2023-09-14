@@ -8,6 +8,8 @@
     "productRecommendations": {
       "type": "product-recommendations",
       "settings": {
+        "padding_top": 70,
+        "padding_bottom": 0
       }
     }
   },

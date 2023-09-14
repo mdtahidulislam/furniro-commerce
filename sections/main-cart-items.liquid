@@ -1,1 +1,302 @@
-<h1>Cart Items</h1>
+<div class="cart {% if cart.empty? %}is-empty {% endif %}">
+    <div class="container rt-container js-cart-container">
+
+                    <div class="cart-warnings text-center rt-pt-80 rt-pb-50">
+                        <h1 class="rt-section-title d-block">Your cart is empty</h1>
+                        <a href="{{ routes.all_products_collection_url }}" class="rt-btn d-inline-block rt-dark-btn  text-uppercase text-center rt-sm rt-mt-20">Continue shopping</a>
+                    </div>
+                  
+        
+
+                    <div class="cart-title">
+                        <h2 class="rt-section-title title--medium">Your Cart</h2>
+                        <a href="{{ routes.all_products_collection_url }}" class="cart-shopping-link">Continue Shopping</a>
+                    </div>
+
+            
+            {% if cart != empty %}
+                    <div class="cart-item-container">
+                        <form action="{{ routes.cart_url }}" method="post" id="cart"> 
+                            <table class="cart-items">
+                                <thead>
+                                    <tr class="cart-item-header">
+                                        <th colspan="2" scope="col">Product</th>
+                                        <th class="right medium-hide large-up-hide" colspan="1" scope="col">Total</th>
+                                        <th class="small-hide" colspan="1" scope="col">Quantity</th>
+                                        <th class="right small-hide" colspan="1" scope="col">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% for item in cart.items %}
+                                        <tr class="cart-item js-cart-line" id="CartItem-{{ item.index | plus: 1 }}" data-key="{{ item.key }}" data-index="{{ item.index | plus: 1 }}">
+                                            <td class="cart-item-media">
+                                                <div>
+                                                    <img src="{{ item.image | image_url: width: 150 }}"
+                                                        class="cart-item__image"
+                                                        alt="{{ item.image.alt | escape }}"
+                                                        loading="lazy"
+                                                        width="150"
+                                                        height="150"
+                                                    >
+                                                </div>
+                                            </td>
+                                            <td class="cart-item-details">
+                                                <a href="{{ item.url }}" class="cart-item-name">{{ item.product.title | escape }}</a>
+                                                <div class="rt-product-option">
+                                                    <span class="money">{{ item.original_price | money }}</span>
+                                                </div>
+                                                <dl>
+                                                    {%- if item.product.has_only_default_variant == false -%}
+                                                        {%- for option in item.options_with_values -%}
+                                                            <div class="rt-product-option">
+                                                                <dt>{{ option.name }}: </dt>
+                                                                <dd>{{ option.value }}</dd>
+                                                            </div>
+                                                        {%- endfor -%}
+                                                    {%- endif -%}
+                                                </dl>
+                                            </td>
+                                            <td class="cart-item-total right medium-hide large-up-hide">
+                                                <div class="cart-item-price-wrapper">
+                                                    <span class="money">{{ item.original_price | money }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="cart-item-quantity">
+                                                <div class="d-flex items-center">
+                                                    <div class="rt-increment-container">
+                                                        <input type="number" name="qty" min="1" value="{{ item.quantity }}" class="input-text qty" />
+                                                    </div>
+                                                    <a href="{{ item.url_to_remove }}" id="Remove-{{ item.index | plus: 1 }}" class="cart-delete-btn js-cart-delete-btn">
+                                                        <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                                                            <path d="M14 3h-3.53a3.07 3.07 0 00-.6-1.65C9.44.82 8.8.5 8 .5s-1.44.32-1.87.85A3.06 3.06 0 005.53 3H2a.5.5 0 000 1h1.25v10c0 .28.22.5.5.5h8.5a.5.5 0 00.5-.5V4H14a.5.5 0 000-1zM6.91 1.98c.23-.29.58-.48 1.09-.48s.85.19 1.09.48c.2.24.3.6.36 1.02h-2.9c.05-.42.17-.78.36-1.02zm4.84 11.52h-7.5V4h7.5v9.5z" fill="currentColor"></path>
+                                                            <path d="M6.55 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5zM9.45 5.25a.5.5 0 00-.5.5v6a.5.5 0 001 0v-6a.5.5 0 00-.5-.5z" fill="currentColor"></path>
+                                                        </svg>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td class="cart-item-total right small-hide">
+                                                <div class="cart-item-price-wrapper">
+                                                    <span class="price price--end money">{{ item.original_line_price | money }}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+            {% endif %}
+
+
+                    <div class="cart-footer d-flex justify-end">
+                        <div class="cart-block">
+                            <div class="cart-result text-right">
+                                <div class="cart-totals d-flex justify-end">
+                                    <p class="cart-subtotal">Subtotal</p>
+                                    <p class="cart-subtotal-value">
+                                        <span class="money">{{ cart.total_price | money_with_currency }}</span>
+                                    </p>
+                                </div>
+                                <small class="cart-tax-note d-block text-right">Taxes and shipping calculated at checkout</small>
+                            </div>
+                            <div class="cart-cta text-right">
+                                <button type="submit" id="checkout" name="checkout" form="cart" {% if cart == empty %} disabled{% endif %} class="cart-checkout-btn">Checkout</button>
+                            </div>
+
+                            {%- if additional_checkout_buttons -%}
+                                <div class="cart-cta">
+                                    <div class="text-center">{{ content_for_additional_checkout_buttons }}</div>
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+
+        
+        
+    </div>
+</div>
+
+{% stylesheet %}
+    @media (max-width: 767.98px) {
+        .title--medium {
+            font-size: 26px;
+        }
+    }
+    .text-shopping {
+        font-size: 15px;
+        color: #000;
+    } 
+
+    .cart-warnings {
+        display: none;
+    }
+
+    .is-empty .cart-warnings {
+        display: block;
+    }
+
+    .is-empty .cart-title,
+    .is-empty .cart-footer {
+        display: none !important;
+    }
+    
+    .cart-item-container {
+        padding-bottom: 4rem;
+    }
+
+    .cart-items {
+        border-spacing: 0;
+        border-collapse: collapse;
+        box-shadow: none;
+        width: 100%;
+        display: table;
+    }
+
+    .cart-items th {
+        text-align: left;
+        padding-bottom: 1.8rem;
+        opacity: .85;
+        font-weight: 400;
+    }
+
+    .cart-items thead th:first-child {
+        width: 60%;
+    }
+    
+    .cart-items *.right {
+        text-align: right;
+    }
+
+    .cart-items td {
+        text-align: left;
+        vertical-align: top;
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .cart-items dt {
+        font-weight: normal;
+    }
+
+    .cart-items thead tr {
+        border-bottom: 1px solid #d2d5d8;
+    }
+
+    .cart-item {
+        display: table-row;
+        border-bottom: 1px solid #d2d5d8;
+    }
+
+    .cart-item-media {
+        width: 11%;
+        position: relative;
+    }
+
+    .cart-item-details {
+        padding-left: 2.5rem;
+    }
+
+    .cart-item-name {
+        color: inherit;
+    }
+
+    .rt-product-option {
+        word-break: break-word;
+        margin-top: 10px;
+    }
+    .rt-product-option * {
+        display: inline;
+    }
+
+    .cart-delete-btn {
+        color: inherit;
+    }
+
+    @media screen and (min-width: 992px) {
+        .large-up-hide {
+            display: none!important;
+        }
+    }
+    @media screen and (min-width: 750px) and (max-width: 991px) {
+        .medium-hide {
+            display: none!important;
+        }
+    }
+
+    @media screen and (max-width: 749px) {
+        .small-hide {
+            display: none!important;
+        }
+        .cart-items, 
+        .cart-items thead, 
+        .cart-items tbody {
+            display: block;
+            width: 100%;
+        }
+        
+        .cart-items thead tr {
+            display: flex;
+            justify-content: space-between;
+        }
+        .cart-item {
+            display: grid;
+            grid-template: repeat(2,auto) / repeat(4,1fr);
+            gap: 1.5rem;
+        }
+        .cart-item-media {
+            width: auto;
+            grid-row: 1 / 3;
+        }
+        .cart-item-details {
+            padding-left: 0;
+            grid-column: 2 / 4;
+        }
+        .cart-item-quantity {
+            padding-top: 0 !important;
+            grid-column: 2 / 5;
+        }
+        .cart-item-totals {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+    }
+    @media screen and (max-width: 425px) {
+        .cart-item-media img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .cart-block {
+        max-width: 35rem;
+        width: 100%;
+    }
+
+    .cart-totals p {
+        font-size: 18px;
+    }
+    .cart-tax-note.d-block.text-right {
+        margin: 10px 0;
+        display: block;
+    }
+    .cart-checkout-btn {
+        width: 17rem;
+        background: #000;
+        color: #fff;
+        font-size: 18px;
+    }
+    .rt-increment-container .qty {
+        max-width: 50px;
+    }
+{% endstylesheet %}
+
+{% schema %}
+    {
+        "name": "Cart",
+        "settings": [
+            
+        ]
+    }
+{% endschema %}

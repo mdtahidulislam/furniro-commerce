@@ -36,11 +36,29 @@ main {
 .text-center {
     text-align: center;
 }
+.text-right {
+    text-align: right;
+}
 input, button {
     padding: 10px 15px;
 }
 input, button {
     cursor: pointer;
+}
+.d-flex{
+    display: flex;
+}
+.items-center {
+    align-items: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.justify-center {
+    justify-content: center;
+}
+.justify-end {
+    justify-content: end;
 }
 /* end common css */
 
@@ -272,6 +290,18 @@ input, button {
     grid-gap: 30px;
 }
 /* end single product */
+
+/* start cart */
+.cart-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.cart-shopping-link {
+    border-bottom: 1px solid #000;
+}
+/* end cart */
 
 /* start footer */
 .footer-area {
