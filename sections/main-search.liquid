@@ -1,1 +1,37 @@
-<h1>Search</h1>
+<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+
+<div class="search-result">
+    <div class="container">
+        <div class="page-title-wrapper text-center">
+            <h1 class="page-title">Search results</h1>
+        </div>
+        <div class="search-area">
+            <predictive-search>
+                <form action="{{ routes.search_url }}" method="get" role="search">
+                    <div class="search-from-area">
+                        <label for="Search">Search</label>
+                        <input
+                            id="Search"
+                            type="search"
+                            name="q"
+                            value="{{ search.terms | escape }}"
+                            role="combobox"
+                            aria-expanded="false"
+                            aria-owns="predictive-search-results"
+                            aria-controls="predictive-search-results"
+                            aria-haspopup="listbox"
+                            aria-autocomplete="list"
+                        >
+                        <input name="options[prefix]" type="hidden" value="last">
+                        <div id="predictive-search" tabindex="-1"></div>
+                    </div>
+                    <div class="search-close-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </form>
+            </predictive-search>
+        </div>
+    </div>
+</div>

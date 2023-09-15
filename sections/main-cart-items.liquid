@@ -29,7 +29,7 @@
                                 <tbody>
 
                                     {% for item in cart.items %}
-                                        <tr class="cart-item js-cart-line" id="CartItem-{{ item.index | plus: 1 }}" data-key="{{ item.key }}" data-index="{{ item.index | plus: 1 }}">
+                                        <tr class="cart-item js-cart-line" id="CartItem-{{ item.index | plus: 1 }}" data-key="{{ item.key }}" data-variant="{{ item.variant_id }}" data-index="{{ item.index | plus: 1 }}">
                                             <td class="cart-item-media">
                                                 <div>
                                                     <img src="{{ item.image | image_url: width: 150 }}"
@@ -58,6 +58,13 @@
                                                 </dl>
                                             </td>
                                             <td class="cart-item-total right medium-hide large-up-hide">
+                                                <div class="loading-overlay js-loading-overlay hidden">
+                                                    <div class="loading-overlay__spinner">
+                                                        <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                                 <div class="cart-item-price-wrapper">
                                                     <span class="money">{{ item.original_price | money }}</span>
                                                 </div>
@@ -65,7 +72,7 @@
                                             <td class="cart-item-quantity">
                                                 <div class="d-flex items-center">
                                                     <div class="rt-increment-container">
-                                                        <input type="number" name="qty" min="1" value="{{ item.quantity }}" class="input-text qty" />
+                                                        <input type="number" name="qty" min="1" max="{{ item.variant.inventory_quantity }}" value="{{ item.quantity }}" class="input-text qty js-cart-qty" />
                                                     </div>
                                                     <a href="{{ item.url_to_remove }}" id="Remove-{{ item.index | plus: 1 }}" class="cart-delete-btn js-cart-delete-btn">
                                                         <svg width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -76,6 +83,13 @@
                                                 </div>
                                             </td>
                                             <td class="cart-item-total right small-hide">
+                                                <div class="loading-overlay js-loading-overlay hidden">
+                                                    <div class="loading-overlay__spinner">
+                                                        <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                                                        </svg>
+                                                    </div>
+                                                </div>
                                                 <div class="cart-item-price-wrapper">
                                                     <span class="price price--end money">{{ item.original_line_price | money }}</span>
                                                 </div>
@@ -212,6 +226,7 @@
 
     .cart-delete-btn {
         color: inherit;
+        margin-left: 10px;
     }
 
     @media screen and (min-width: 992px) {
@@ -289,6 +304,52 @@
     }
     .rt-increment-container .qty {
         max-width: 50px;
+    }
+
+    .cart-item-total {
+        position: relative;
+    }
+    .loading-overlay {
+        position: absolute;
+        right: 0;
+        top: 33px;
+    }
+    .loading-overlay__spinner {
+        width: 1.8rem;
+        display: inline-block;
+    }
+    .spinner {
+        animation: rotator 1.4s linear infinite;
+    }
+    .path {
+        stroke-dasharray: 280;
+        stroke-dashoffset: 0;
+        transform-origin: center;
+        stroke: rgb(18, 18, 18);
+        animation: dash 1.4s ease-in-out infinite;
+    }
+    @keyframes rotator {
+        0% {
+            transform: rotate(0);
+        }
+
+        100% {
+            transform: rotate(270deg);
+        }
+    }
+    @keyframes dash {
+        0% {
+            stroke-dashoffset: 280;
+        }
+    
+        50% {
+            stroke-dashoffset: 75;
+            transform: rotate(135deg);
+        }
+        100% {
+            stroke-dashoffset: 280;
+            transform: rotate(450deg);
+        }
     }
 {% endstylesheet %}
 

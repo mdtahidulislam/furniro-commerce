@@ -60,6 +60,9 @@ input, button {
 .justify-end {
     justify-content: end;
 }
+.hidden {
+    display: none;
+}
 /* end common css */
 
 /*  start header */
@@ -108,6 +111,103 @@ input, button {
 }
 
 /*  end header */
+
+/* start search */
+.header-area{
+    position: relative;
+}
+.search-area {
+    display: block;
+    position: absolute;
+    left: 0;
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+.search-area form {
+    max-width: 500px;
+    margin: 13px auto;
+    position: relative;
+    display: flex;
+}
+.search-close-btn {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.search-from-area {
+    flex: 1;
+}
+.search-area form label {
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 5px;
+    font-size: 12px;
+}
+.search-area form input#Search {
+    width: 100%;
+    padding: 24px 20px 10px 20px;
+}
+#predictive-search-results button {
+    width: 100%;
+    border-bottom: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top-width: 1px;
+    margin-top: 5px;
+}
+#predictive-search-results {
+    background: #fff;
+    border: 1px solid #ddd;
+}
+#predictive-search-results ul li {
+    padding: 10px 14px;
+}
+#predictive-search-results ul li:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+#predictive-search-results ul li a {
+    display: block;
+}
+.search-result .search-area {
+    display: block;
+    position: relative;
+}
+.search-result .search-close-btn {
+    display: none;
+}
+.predictive-search-type {
+    padding: 10px 0 10px 14px;
+    background: #eee;
+}
+.search-result-lists {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    margin-top: 80px;
+}
+@media screen and (max-width:768px){
+    .search-result-lists {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+}
+.search-result-line-item {
+    border: 1px solid #afafaf;
+    background: #eee;
+    padding: 20px;
+    border-radius: 5px;
+}
+.result-image img {
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+/* end search */
 
 /* start customer login */
 .form-title-wrapper {
@@ -178,6 +278,11 @@ input, button {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
 }
+@media screen and (max-width:768px){
+    .collections-area {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 .collection-title-wrapper {
     display: flex;
     justify-content: center;
@@ -206,15 +311,27 @@ input, button {
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
 }
+@media screen and (max-width:768px){
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+}
+@media screen and (max-width:540px){
+    .product-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
 .product-grid-item {
     border: 1px solid #d2d5d8;
     border-radius: 5px;
     padding: 20px;
     position: relative;
 }
-.product-img img {
+.product-img {
     width: 100%;
     display: block;
+    text-align: center;
 }
 .product-title-wrapper {
     margin-top: 20px;
@@ -260,6 +377,21 @@ input, button {
 .product-left {
     grid-column: span 7;
 }
+@media screen and (max-width:768px){
+    .product-left,
+    .product-right {
+        grid-column: span 6!important;
+    }
+}
+@media screen and (max-width:640px){
+    .product-container {
+        grid-gap: 0px;
+    }
+    .product-left,
+    .product-right {
+        grid-column: span 12!important;
+    }
+}
 .product-big-img {
     width: 100%;
     height: 100%;
@@ -288,6 +420,18 @@ input, button {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
+}
+@media screen and (max-width:768px) {
+    .product-recommendations-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .product-recommendations-grid {
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 20px;
+    }
 }
 /* end single product */
 

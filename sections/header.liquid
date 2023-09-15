@@ -1,3 +1,5 @@
+<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+
 <header class="header-area">
   <div class="header-container">
     <div class="header-logo">
@@ -22,7 +24,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="search">
+                <a href="#" class="search-btn">
                     <img src="{{ 'search.svg' | asset_url }}" alt="search" width="" height="" loading="lazy">
                 </a>
             </li>
@@ -32,11 +34,39 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="cart">
+                <a href="{{ routes.cart_url }}" class="cart">
                     <img src="{{ 'cart.svg' | asset_url }}" alt="cart" width="" height="" loading="lazy">
                 </a>
             </li>
         </ul>
+    </div>
+    <div class="search-area">
+        <predictive-search>
+            <form action="{{ routes.search_url }}" method="get" role="search">
+                <div class="search-from-area">
+                    <label for="Search">Search</label>
+                    <input
+                        id="Search"
+                        type="search"
+                        name="q"
+                        value="{{ search.terms | escape }}"
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="predictive-search-results"
+                        aria-controls="predictive-search-results"
+                        aria-haspopup="listbox"
+                        aria-autocomplete="list"
+                    >
+                    <input name="options[prefix]" type="hidden" value="last">
+                    <div id="predictive-search" tabindex="-1"></div>
+                </div>
+                <div class="search-close-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </form>
+        </predictive-search>
     </div>
   </div>
 </header>

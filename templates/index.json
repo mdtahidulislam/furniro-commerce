@@ -11,18 +11,10 @@
         "padding_top": 80,
         "padding_bottom": 50
       }
-    },
-    "0c333693-d027-4213-9415-bf381c4d214a": {
-      "type": "product-recommendations",
-      "settings": {
-        "padding_top": 50,
-        "padding_bottom": 0
-      }
     }
   },
   "order": [
     "collectionLists",
-    "homeProduct",
-    "0c333693-d027-4213-9415-bf381c4d214a"
+    "homeProduct"
   ]
 }

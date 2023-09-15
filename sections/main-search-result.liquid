@@ -1,0 +1,49 @@
+<div class="search-result-area">
+    <div class="container">
+        <div class="search-result-lists">
+            {% if search.results_count > 0 %}
+                {% for item in search.results %}
+                    <!-- Result {{ forloop.index }}-->
+                    <a href="{{ item.url }}" class="search-result-line-item">
+                        
+                        {% if item.object_type == 'article' -%}
+                        {%- comment -%}
+                            'item' is an article
+                            All article object properties can be accessed.
+                        {%- endcomment -%}
+                        
+                        {% if item.image -%}
+                            <div class="result-image">
+                                {{ item | image_url: width: 100 | image_tag }}
+                            </div>
+                        {% endif %}
+                        {%- elsif item.object_type == 'page' -%}
+                        {%- comment -%}
+                            'item' is a page.
+                            All page object properties can be accessed.
+                        {%- endcomment -%}
+                        {%- else -%}
+                        {%- comment -%}
+                            'item' is a product.
+                            All product object properties can be accessed.
+                        {%- endcomment -%}
+                        
+                        {%- if item.featured_image -%}
+                            <div class="result-image">
+                                {{ item.featured_image | image_url: width: 100 | image_tag }}
+                            </div>
+                        {% endif %}
+                        {%- endif -%}
+                        <h3>
+                            {{ item.title }}
+                        </h3>
+                        <span>{{ item.content | strip_html | truncatewords: 40 | highlight: search.terms }}</span>
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No results found for “{{ search.terms }}”. Check the spelling or use a different word or phrase.</p>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
