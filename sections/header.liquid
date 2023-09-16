@@ -34,9 +34,15 @@
                 </a>
             </li>
             <li>
-                <a href="{{ routes.cart_url }}" class="cart">
-                    <img src="{{ 'cart.svg' | asset_url }}" alt="cart" width="" height="" loading="lazy">
-                </a>
+                {% if settings.ajax_add_to_cart %}
+                    <a href="#cart" class="cart js-header-cart-btn">
+                        <img src="{{ 'cart.svg' | asset_url }}" alt="cart" width="" height="" loading="lazy">
+                    </a>
+                {% else %}
+                    <a href="{{ routes.cart_url }}" class="cart">
+                        <img src="{{ 'cart.svg' | asset_url }}" alt="cart" width="" height="" loading="lazy">
+                    </a>
+                {% endif %}
             </li>
         </ul>
     </div>

@@ -41,6 +41,53 @@
                 $(searchContainer).css({display: 'none'});
             });
         }
+        // cart popup
+        const cartPopupHolder = $('.js-cart-popup-holder');
+        const cartPopupCloseBtn = $('.js-cart-popup-close');
+        const headerCartBtn = $('.js-header-cart-btn');
+        if ($(cartPopupCloseBtn).length) {
+            $(cartPopupCloseBtn).on('click', function(){
+                $(this).parent().hide();
+            });
+        }
+        if ($(headerCartBtn).length) {
+            $(headerCartBtn).on('click', function(){
+                $(cartPopupHolder).show();
+            });
+        }
+        /**
+         * handle add to cart button
+        */
+        const addToCartBtn = $('.js-add-to-cart-btn');
+
+        if ($(addToCartBtn).length) {
+            $(addToCartBtn).on('click', function(){
+                let addToCartForm = document.querySelector('form[action$="/cart/add"]');
+                let formData = new FormData(addToCartForm);
+                let rtContainer = $('.js-cart-container');
+
+                fetch(window.Shopify.routes.root + 'cart/add.js', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => {
+                    return res.json();
+                })
+                .then(cartDta => {
+                    if (cartDta) {
+                        $(cartPopupHolder).show();
+                    }
+                    fetch(window.location.pathname + "?section_id=main-cart-items")
+                    .then(res => res.text())
+                    .then(res => {
+                        rtContainer.html(res);
+                    })
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            });
+        }
 
         /**
          * cart page 
@@ -97,7 +144,58 @@
                 });
             });
         }
-        // quantity update
+        
+        if ($('.js-cart-popup-delete-btn').length) {
+            $(document).on('click', '.js-cart-popup-delete-btn', function(e) {
+                // prevent anchor default behaviour
+                e.preventDefault();
+            
+                // get line item & key
+                const cartLine = $(this).parents('tr.js-cart-line').attr('data-index');
+                const cartLineKey = $(this).parents('tr.js-cart-line').attr('data-key');
+                const loadingOverlay = $(this).parents('.js-cart-line').find('.js-loading-overlay');
+                const price = $(this).parents('.js-cart-line').find('.price');
+            
+                // container where to rerender section
+                let rtContainer = $('.js-cart-container');
+
+                // loading effect
+                $(loadingOverlay).removeClass('hidden');
+                $(price).empty();
+            
+                /**
+                 * post request to delete line
+                 * dynamic url
+                 * pass line index
+                 * set to quantity 0
+                 * get request to render static section
+                */
+                fetch(window.Shopify.routes.root + 'cart/change.js', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        line: cartLine,
+                        quantity: 0
+                    })
+                })
+                .then(res => res.json())
+                .then(res => {
+                    fetch(window.location.pathname + "?section_id=cart-popup")
+                    .then(res => res.text())
+                    .then(res => {
+                        rtContainer.html(res);
+                    })
+                    .finally(()=>{
+                        // loading effect
+                        $(loadingOverlay).addClass('hidden');
+                    });
+                });
+            });
+        }
+        // quantity and price update
         if ($('.js-cart-qty').length) {
             $(document).on('change', '.js-cart-qty', function (e) {
                 // Prevent anchor default behavior
@@ -135,13 +233,6 @@
                     body: JSON.stringify(data)
                 })
                 .then(res => {
-                    console.log(res);
-                    // if (res.status === 422) {
-                    //     let newRes = res.json();
-                    //     setTimeout(() => {
-                    //         $('.cart-item-quantity').append(`<samall>${newRes.message}</small>`);
-                    //     }, 1000);
-                    // }
                     return res.json();
                 })
                 .then(cartData => {

@@ -40,8 +40,18 @@
                             name="id"
                             value="{{ product.selected_or_first_available_variant.id }}"
                         >
-                        <input type="number" id="quantity" name="quantity" value="1" min="1">
-                        <input type="submit" value="Add to cart" {% unless current_variant.available %}disabled="disabled" {% endunless %}>
+                        <input type="number" id="quantity" name="quantity" value="1" min="1" max="{{ current_variant.inventory_quantity }}">
+
+                        {% if settings.ajax_add_to_cart %}
+                            <button type="button" class="add-to-cart-btn js-add-to-cart-btn" {% unless current_variant.available %}disabled="disabled" {% endunless %}>
+                                <span>Add to cart</span>
+                            </button>
+                        {% else %}
+                            <button type="submit" class="add-to-cart-btn" {% unless current_variant.available %}disabled="disabled" {% endunless %}>
+                                <span>Add to cart</span>
+                            </button>
+                        {% endif %}
+                        
                         {{ form | payment_button }}
                     {% endform %}
                 </div>
@@ -50,3 +60,12 @@
         </div>
     </div>
 </section>
+
+{% schema %}
+    {
+        "name": "Product",
+        "settings": [
+            
+        ]
+    }
+{% endschema %}

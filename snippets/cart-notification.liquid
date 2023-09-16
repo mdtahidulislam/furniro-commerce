@@ -1,0 +1,20 @@
+<div class="cart-notification-holder container">
+    <div class="cart-notification">
+        <div class="cart-notification-header">
+            <h2 class="cart-notification-heading">{%- render 'icon-checkmark' -%} Item added to your cart</h2>
+            <div class="cart-notification-close">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="cart-notification-product js-cart-notification-product"></div>
+        <div class="cart-notification-links">
+            <a href="{{ routes.cart_url }}" class="cart-notification-link cart-notification-view">View Cart</a>
+            <form action="{{ routes.cart_url }}" method="post" id="cart-notification-form">
+                <button class="cart-notification-link cart-notification-cehckout" name="checkout">Checkout</button>
+            </form>
+            <a href="{{ routes.all_products_collection_url }}" class="cart-notification-link cart-notification-shop">Continue Shopping</a>
+        </div>
+    </div>
+</div>

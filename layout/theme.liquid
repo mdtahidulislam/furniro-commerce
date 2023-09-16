@@ -51,6 +51,15 @@
 
     <!-- main content -->
     <main>
+        {% comment %} cart popup {% endcomment %}
+        <div class="cart-popup-holder js-cart-popup-holder hidden">
+            <div class="cart-popup-close js-cart-popup-close">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </div>
+            {% section 'main-cart-items' %}
+        </div>
         <!-- dynamically output from all template  -->
         {{ content_for_layout }}
     </main>

@@ -27,5 +27,16 @@
         "default": "poppins_n2"
       }
     ]
+  },
+  { 
+    "name": "Enable Ajax Cart System",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "ajax_add_to_cart",
+        "label": "Enable AJAX cart system",
+        "default": true
+      }
+    ]
   }
 ]
